@@ -126,4 +126,4 @@ Both image files have to be stored in a folder in _user/pages/images/_:
 * all Grav developers and contributors
 * the [Bootstrap developers](https://github.com/orgs/twbs/people)
 * [Thomas Park](http://thomaspark.co/) for Bootswatch theme collection
-* [Ralf Geschke](https://www.geschke.net/) or the Tikva theme
+* [Ralf Geschke](https://www.geschke.net/) for the Tikva theme
