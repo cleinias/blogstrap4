@@ -1,7 +1,7 @@
 # Blogstrap4
 
 
-#FIX THIS! ![Blogstrap4](screenshot.jpg)
+# [Blogstrap4](screenshot.jpg)
 
 **Blogstrap4** is a minimalistic theme is for [Grav CMS](http://github.com/getgrav/grav) based on the Bootstrap 4 framework.
 
