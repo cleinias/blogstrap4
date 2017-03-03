@@ -1,0 +1,5 @@
+enabled: true
+subfooter:
+  content: '[Grav](http://getgrav.org) was <i class="fa fa-code"></i> with <i class="fa fa-heart"></i> by [RocketTheme](http://www.rockettheme.com). Theme Blogstrap4 by [Stefano Franchi](https://stefano.cleinias.org).'
+dropdown:
+  enabled: true
