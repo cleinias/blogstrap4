@@ -1,8 +1,10 @@
 <div class="footer-container" style="{% if theme_config.footer.color_fg %}color: {{ theme_config.footer.color_fg }};{% endif %}">
   <div class="container" style="padding-top: 20px;">
-    <footer>
-
+   <footer>
+      {# Create a collection of footer elements from pages found in the "/footer" folder #}
       {% set footer_collection = page.find('/footer').children.order('default', 'asc').slice(0, 6) %}
+       
+      {# Create a grid for the footer, based on the numebr of colums specified in the config file #}
       <div class="row">
 	{% if theme_config.footer.columns %}
             {% for column in 1..theme_config.footer.columns %}
