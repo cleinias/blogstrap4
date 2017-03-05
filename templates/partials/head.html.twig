@@ -1,0 +1,73 @@
+<meta charset="utf-8" />
+{# Page title from page header, if present #}
+<title>{% if header.title %}
+    {{ header.title|e('html') }} |
+{% else %}
+    {{ site.title|e('html') }}
+{% endif %}
+</title> 
+
+{# Standard tags for Bootstrap #}
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{# Metadata are loaded from their own partial template #}
+{% include 'partials/metadata.html.twig' %}
+
+{# Deal with robots #}
+{% if header.robots %}
+    <meta name="robots" content="{{ header.robots }}">
+{% endif %}
+
+{# Get favicon from theme's config file if present, otherwise fall back on standard files in images folder #}
+{% set favicon_file = theme_config.favicon_file|first %} 
+{% if favicon_file %}
+    <link rel="icon" type="{{ favicon_file.type }}" href="/{{ favicon_file.path }}" />
+{% else %}
+    <link rel="icon" type="image/png" href="{{ url('theme://images/logo.png') }}" />
+{% endif %}
+
+{# Canonical URL for the page is always the page's url #}  
+<link rel="canonical" href="{{ page.url(true, true) }}" />
+
+{# Load appropriate stylesheet: use standard Bootstrap filesheet if default was chosen in config, otherwise load a Bootswatch sub-theme #}
+{% block stylesheets %}
+    {% if theme_config.theme.stylesheet != 'default' %}
+	{% do assets.addCss("theme://css/bootswatch/#{ theme_config.theme.stylesheet }/bootstrap.min.css", 100) %}
+    {% else %}
+	{% do assets.addCss('theme://css/bootstrap/bootstrap.min.css', 100) %}
+    {% endif %}
+    {% do assets.addCss('https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', 99) %}
+
+    {# Load overriding custom style sheet #}
+    {% do assets.addCss('theme://css/custom.css', 98) %}
+{% endblock %}
+{{ assets.css() }}
+
+{#
+<style>
+
+{# Move down content because we have a fixed navbar that is 50px tall. Use extra header padding set in config file #}
+{# body {
+     {% if theme_config.theme.adjust_header != 0 %}
+     padding-top: {{ 60 + theme_config.theme.adjust_header }}px;
+     {% else %}
+     padding-top: 60px;
+     {% endif %}
+}
+#}
+     
+ {# Use config's file footer's background's color #}
+ {% if theme_config.footer.color_bg %}
+ .footer-container { background-color: {{ theme_config.footer.color_bg }} }; 
+ {% endif %}
+</style>
+{% block javascripts %}
+    {% do assets.addJs('jquery', 100) %}
+    {% do assets.add('theme://js/tether.min.js') %} {# Required by Bootstrap for placement of mouse hover hints and simila items #}
+
+    {% do assets.add('theme://js/bootstrap/bootstrap.min.js') %}
+
+{% endblock %}
+{{ assets.js() }}
+
