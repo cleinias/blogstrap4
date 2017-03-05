@@ -27,7 +27,11 @@
             {% include 'partials/footer.html.twig' %}
         {% endblock %}
 #}
-	
+
+{% block footer %}     
+    {%  include 'partials/footer_container.html.twig' %}
+{% endblock footer %}    
+   
 {# Block temporarily disabled until template's ready 
 	{% block subfooter %}
 	    {% include 'partials/subfooter.html.twig' %}
