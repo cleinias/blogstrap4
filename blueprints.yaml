@@ -133,7 +133,14 @@ form:
       filesize: 5
       accept:
         - image/*
-      description: Leave empty if no image is desired 
+      description: Leave empty if no image is desired
+
+    site_description:
+      type: editor
+      size: medium
+      label: Site description (sub-header for main page header)
+      default: ""
+
 
     favicon_file:
       type: file 
