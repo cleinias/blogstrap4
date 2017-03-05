@@ -5,7 +5,7 @@
 {% else %}
     {{ site.title|e('html') }}
 {% endif %}
-</title> 
+</title>
 
 {# Standard tags for Bootstrap #}
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,14 +20,14 @@
 {% endif %}
 
 {# Get favicon from theme's config file if present, otherwise fall back on standard files in images folder #}
-{% set favicon_file = theme_config.favicon_file|first %} 
+{% set favicon_file = theme_config.favicon_file|first %}
 {% if favicon_file %}
     <link rel="icon" type="{{ favicon_file.type }}" href="/{{ favicon_file.path }}" />
 {% else %}
     <link rel="icon" type="image/png" href="{{ url('theme://images/logo.png') }}" />
 {% endif %}
 
-{# Canonical URL for the page is always the page's url #}  
+{# Canonical URL for the page is always the page's url #}
 <link rel="canonical" href="{{ page.url(true, true) }}" />
 
 {# Load appropriate stylesheet: use standard Bootstrap filesheet if default was chosen in config, otherwise load a Bootswatch sub-theme #}
@@ -49,18 +49,18 @@
 
 {# Move down content because we have a fixed navbar that is 50px tall. Use extra header padding set in config file #}
 {# body {
-     {% if theme_config.theme.adjust_header != 0 %}
-     padding-top: {{ 60 + theme_config.theme.adjust_header }}px;
-     {% else %}
-     padding-top: 60px;
-     {% endif %}
+{% if theme_config.theme.adjust_header != 0 %}
+padding-top: {{ 60 + theme_config.theme.adjust_header }}px;
+{% else %}
+padding-top: 60px;
+{% endif %}
 }
 #}
-     
- {# Use config's file footer's background's color #}
- {% if theme_config.footer.color_bg %}
- .footer-container { background-color: {{ theme_config.footer.color_bg }} }; 
- {% endif %}
+
+{# Use config's file footer's background's color #}
+{% if theme_config.footer.color_bg %}
+    .footer-container { background-color: {{ theme_config.footer.color_bg }} };
+{% endif %}
 </style>
 {% block javascripts %}
     {% do assets.addJs('jquery', 100) %}
@@ -70,4 +70,3 @@
 
 {% endblock %}
 {{ assets.js() }}
-

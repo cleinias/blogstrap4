@@ -122,7 +122,19 @@ form:
       filesize: 5
       accept:
         - image/*
-          
+
+    headerBackgroundImage:
+      type: file
+      label: Background image for home page header
+      multiple: false 
+      destination: 'user/pages/images'
+      random_name: false
+      avoid_overwriting: false
+      filesize: 5
+      accept:
+        - image/*
+      description: Leave empty if no image is desired 
+
     favicon_file:
       type: file 
       destination: 'user/pages/images'

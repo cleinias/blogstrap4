@@ -12,25 +12,40 @@
 {% set fileLogo =  theme_config.fileLogo | first %}
 {% if fileLogo   and theme_config.navbar.use_logo %} 
     {% set brand = '<img src=\"' ~ fileLogo.path ~ '\" width=\"100\" height=\"40\" alt=\"' ~ site.title ~ '\">'  %}  
-{#    {% set brand ='This is the file logo path:- ' ~ fileLogo.path ~ '-' %} #}
+    {#    {% set brand ='This is the file logo path:- ' ~ fileLogo.path ~ '-' %} #}
 {% else %}
     {% set brand = site.title %} 
-{#    {% set brand ='This is the file logo path: +' ~ fileLogo.path ~ '+' %} #}
+    {#    {% set brand ='This is the file logo path: +' ~ fileLogo.path ~ '+' %} #}
 {% endif %}
-    
-{# Configure navigation bar #}
-<nav class="navbar navbar-default navbar-toggleable-md navbar-light {{navbar_inverse}} {{ navbar_bg }}" {{ navbar_style }}>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	<span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="#">{{brand}}</a>
 
-    <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
-	<ul class="navbar-nav ml-auto">
-	    {% for p in pages.children.visible %}
-		<li class="nav-item active">
-		    <a class="nav-link"  href="{{ p.url }}">{{ p.menu }}</a>
-		</li>
-	    {% endfor %}
+{# Set header background image, if configured, with inline styling #}
+{# SWITCH TO REM! #}
+{% if theme_config.headerBackgroundImage | first %}
+    {% set header_bg_style = 'style=\"width:100%; height:275px; background:url(\'' ~ (theme_config.headerBackgroundImage | first).path  ~ '\') no-repeat top center; background-size:cover;\"' %}
+{% else %}
+    {% set header_bg_style = '' %}
+{% endif %}
+
+
+{# Configure header and navigation bar #}
+<div class="blog-header" {{header_bg_style}}>
+    <div class="container"> {# Try switching to container-fluid #}
+        <nav class="navbar navbar-default navbar-toggleable-md navbar-light {{navbar_inverse}} {{ navbar_bg }}" {{ navbar_style }}>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">{{brand}}</a>
+        <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
+	    <ul class="navbar-nav ml-auto">
+	        {% for p in pages.children.visible %}
+		    <li class="nav-item active">
+		        <a class="nav-link"  href="{{ p.url }}">{{ p.menu }}</a>
+		    </li>
+	        {% endfor %}
+            </ul>
+        </div>
+        </nav>
+        <h1 class="blog-title">{{site.title}}</h1>
+        <p class="lead blog-description">A blog theme for Grav built with Bootstrap 4.</p>
     </div>
-</nav>    
+</div>
