@@ -14,7 +14,7 @@
 				<h3 class="post-subtitle">{{ post.header.subheading }}</h3>
 			    {% endif %}
 			</a>
-			{# Add translation strings, eventually: BLOGSTRAP4.POST_BY, BLOGSTRAP4.POST_ON  #}
+			{# TO DO:  Add translation strings, eventually: BLOGSTRAP4.POST_BY, BLOGSTRAP4.POST_ON  #}
 			{% if theme_config.include_blog_author  %}
 			    <p class="post-meta">{{ 'Post by'|t }} {{ post.header.author }} {{ 'on'|t }} {{ post.date|date(dateformat) }}</p>
 			{% else %}
