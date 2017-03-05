@@ -1,73 +1,36 @@
-{% macro loop(page) %}
-    {% for p in page.children.visible %}
-        {% set current_page = (p.active or p.activeChild) ? 'active' : '' %}
-        {% if p.children.visible.count > 0 %}
-            <li class="nav-item dropdown has-children {{ current_page }}">
-                <a class="nav-link dropdown-toggle" href="{{ p.url }}" id="dropdown_{{ p.url|md5 }}" 
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {% if p.header.icon %}<i class="fa fa-{{ p.header.icon }}"></i>{% endif %}
-                    {{ p.menu }}</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown_{{ p.url|md5 }}">{{ _self.loop_dropdown(p) }}</div>
-            </li>
-        {% else %}
-           <li class="nav-item {{ current_page }}">
-                <a class="nav-link" href="{{ p.url }}">
-                    {% if p.header.icon %}<i class="fa fa-{{ p.header.icon }}"></i>{% endif %}
-                    {{ p.menu }}
-                </a>
-            </li> 
-        {% endif %}
-    {% endfor %}
-{% endmacro %}
+{# Set navigation bar background color as configured in the yaml file (or via the admin panel) #}
+{% if theme_config.navbar.background_color %}
+    {% set navbar_style = "style=\"background-color: #{theme_config.navbar.background_color}\"" %}
+    {% set navbar_bg = '' %} 
+{% elseif theme_config.navbar.background != 'default' %}
+    {% set navbar_bg = theme_config.navbar.background %}
+{% else %}
+    {% set navbar_bg = 'bg-primary' %}
+{% endif %}
 
+{# Set brand logo if present, otherwise use site title #}
+{% set fileLogo =  theme_config.fileLogo | first %}
+{% if fileLogo   and theme_config.navbar.use_logo %} 
+    {% set brand = '<img src=\"' ~ fileLogo.path ~ '\" width=\"100\" height=\"40\" alt=\"' ~ site.title ~ '\">'  %}  
+{#    {% set brand ='This is the file logo path:- ' ~ fileLogo.path ~ '-' %} #}
+{% else %}
+    {% set brand = site.title %} 
+{#    {% set brand ='This is the file logo path: +' ~ fileLogo.path ~ '+' %} #}
+{% endif %}
+    
+{# Configure navigation bar #}
+<nav class="navbar navbar-default navbar-toggleable-md navbar-light {{navbar_inverse}} {{ navbar_bg }}" {{ navbar_style }}>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">{{brand}}</a>
 
-{% macro loop_dropdown(page) %}
-    {% for p in page.children.visible %}
-        {% set current_page = (p.active or p.activeChild) ? 'active' : '' %}
-        {% if p.children.visible.count > 0 %}
-            <li class="nav-item dropdown has-children {{ current_page }}">
-                <a class="nav-link dropdown-toggle" href="{{ p.url }}" id="dropdown_{{ p.url|md5 }}" 
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {% if p.header.icon %}<i class="fa fa-{{ p.header.icon }}"></i>{% endif %}
-                    {{ p.menu }}</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown_{{ p.url|md5 }}">
-                    {{ _self.loop_dropdown(p) }}
-                </div>
-            </li>
-        {% else %}
-            <!-- <li class="nav-item {{ current_page }}"> -->
-                <a class="dropdown-item" href="{{ p.url }}">
-                    {% if p.header.icon %}<i class="fa fa-{{ p.header.icon }}"></i>{% endif %}
-                    {{ p.menu }}
-                </a>
-          <!--  </li> -->
-        {% endif %}
-    {% endfor %}
-{% endmacro %}
-
-   
-
-<ul class="navbar-nav mr-auto">
-    {% if theme_config.dropdown.enabled %}
-            {{ _self.loop(pages) }}
-    {% else %}
-        {% for page in pages.children.visible %}
-            {% set current_page = (page.active or page.activeChild) ? 'active' : '' %}
-            <li class="nav-item {{ current_page }}">
-                <a class="nav-link" href="{{ page.url }}">
-                    {% if page.header.icon %}<i class="fa fa-{{ page.header.icon }}"></i>{% endif %}
-                    {{ page.menu }}
-                </a>
-            </li>
-        {% endfor %}
-    {% endif %}
-    {% for mitem in site.menu %}
-        <li class="nav-item">
-            <a class="nav-link" href="{{ mitem.url }}">
-                {% if mitem.icon %}<i class="fa fa-{{ mitem.icon }}"></i>{% endif %}
-                {{ mitem.text }}
-            </a>
-        </li>
-    {% endfor %}
-</ul>
-
+    <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
+	<ul class="navbar-nav ml-auto">
+	    {% for p in pages.children.visible %}
+		<li class="nav-item active">
+		    <a class="nav-link"  href="{{ p.url }}">{{ p.menu }}</a>
+		</li>
+	    {% endfor %}
+    </div>
+</nav>    
