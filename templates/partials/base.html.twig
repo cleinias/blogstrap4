@@ -10,33 +10,21 @@
         {% endblock %}
     </head>
     <body>
-        {# Navigation partial template includes header as well #}
+        {# Partial template 'navigation' includes header as well #}
         {% block navigation %}
 	    {% include 'partials/navigation.html.twig' %}
         {% endblock %}
 
-{# Block temporarily disabled until template's ready 
-        {% block header %}
-            {% include 'partials/header.html.twig' %}
-        {% endblock %}
-#}
         {% block content %}{% endblock %}
 
-{# Block temporarily disabled until template's ready
-        {% block footer %}
-            {% include 'partials/footer.html.twig' %}
-        {% endblock %}
-#}
-
-{% block footer %}     
-    {%  include 'partials/footer_container.html.twig' %}
-{% endblock footer %}    
+        {% block footer %}  {# Multicolumn footer #}   
+            {%  include 'partials/footer_container.html.twig' %}
+        {% endblock footer %}    
    
-{# Block temporarily disabled until template's ready 
-	{% block subfooter %}
+	{% block subfooter %} {# Subfooter line(s) for copyright, 'made with ..' line, etc. #}
 	    {% include 'partials/subfooter.html.twig' %}
 	{% endblock %}
-#}
+
 
 {# Block temporarily disabled until template's ready	
         {% block bottom %}
