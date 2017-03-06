@@ -5,7 +5,7 @@
     {% set dateformat = admin.page.dateformat ?: config.system.pages.dateformat.short ?: "F d, Y" %}
     <div class="container">
 	<div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-lg-9 col-lg-offset-2 col-md-10 col-md-offset-1">
 		{% for post in collection %}
 		    <div class="post-preview">
 			<a href="{{ post.url }}">
@@ -14,7 +14,7 @@
 				<h3 class="post-subtitle">{{ post.header.subheading }}</h3>
 			    {% endif %}
 			</a>
-			{# TO DO:  Add translation strings, eventually: BLOGSTRAP4.POST_BY, BLOGSTRAP4.POST_ON  #}
+			{# Add translation strings, eventually: BLOGSTRAP4.POST_BY, BLOGSTRAP4.POST_ON  #}
 			{% if theme_config.include_blog_author  %}
 			    <p class="post-meta">{{ 'Post by'|t }} {{ post.header.author }} {{ 'on'|t }} {{ post.date|date(dateformat) }}</p>
 			{% else %}
@@ -26,6 +26,10 @@
 		{% if config.plugins.pagination.enabled and collection.params.pagination %}
 		    {% include 'partials/pagination.html.twig' with {'base_url':page.url, 'pagination':collection.params.pagination} %}
 		{% endif %}
+            </div>
+            <div class="col-lg-3 col-md-2">
+                <h3> SIDEBAR BEGINS HERE</h3>
+                {% include 'partials/sidebar.html.twig' %}
             </div>
 	</div>
     </div>
