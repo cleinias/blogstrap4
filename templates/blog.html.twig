@@ -11,8 +11,11 @@
 			<a href="{{ post.url }}">
 			    <h2 class="post-title">{{ post.title }}</h2>
 			    {% if post.header.subheading %}
-				<h3 class="post-subtitle">{{ post.header.subheading }}</h3>
+                                {% set subheader = post.header.subheading %}
+                            {% else %}
+                                {% set subheader = post.summary() %}
 			    {% endif %}
+			    <h3 class="post-subtitle">{{subheader}}</h3>
 			</a>
 			{# Add translation strings, eventually: BLOGSTRAP4.POST_BY, BLOGSTRAP4.POST_ON  #}
 			{% if theme_config.include_blog_author  %}
