@@ -11,11 +11,14 @@
     </head>
     <body>
         {# Partial template 'navigation' includes header as well as header #}
-        <div class="container" style="width:893px"> {# Sets page width to Bootstrap default of 960px unless overriden in custom.css  #}
-        {% block navigation %}
-	    {% include 'partials/navigation.html.twig' %}
-        {% endblock %}
-
+        <div class="container"> {# Sets page width to Bootstrap default of 960px unless overriden in custom.css  #}
+            {% block navigation %}
+	        {% include 'partials/navigation.html.twig' %}
+            {% endblock %}
+            {% if theme_config.extra_space_below_header != 0 %}
+                {% set extra_padding = theme_config.extra_space_below_header %}
+                <p style="padding-bottom:{{extra_padding}}px"></p>
+        {% endif %}
         {% block content %}{% endblock %}
 
         {% block footer %}  {# Multicolumn footer #}   

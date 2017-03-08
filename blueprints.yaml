@@ -67,11 +67,11 @@ form:
           'united': "United"
           'yeti': "Yeti"
 
-    theme.adjust_header:
+    add_space_below_header
         type: text
         size: medium
-        label: Adjust Header
-        description: Adjust header by adding a distance between navigation and content. Some of the styles need more space, so you can use this option to adjust. 
+        label: Add white space below header
+        description: Add some space between the header and content. Some of the styles are too cramped, use this option to adjust. 
         default: 0
         validate:
           type: int
