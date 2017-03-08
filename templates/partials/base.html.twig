@@ -10,7 +10,8 @@
         {% endblock %}
     </head>
     <body>
-        {# Partial template 'navigation' includes header as well #}
+        {# Partial template 'navigation' includes header as well as header #}
+        <div class="container" style="width:893px"> {# Sets page width to Bootstrap default of 960px unless overriden in custom.css  #}
         {% block navigation %}
 	    {% include 'partials/navigation.html.twig' %}
         {% endblock %}
@@ -24,7 +25,7 @@
 	{% block subfooter %} {# Subfooter line(s) for copyright, 'made with ..' line, etc. #}
 	    {% include 'partials/subfooter.html.twig' %}
 	{% endblock %}
-
+        </div>
 
 {# Block temporarily disabled until template's ready	
         {% block bottom %}
