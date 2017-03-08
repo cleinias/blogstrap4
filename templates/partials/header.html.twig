@@ -1,0 +1,38 @@
+{# Set header background image, if configured, with inline styling. Adjust also color for navbar and header text #}
+{% if page.header.header_image %}
+    {% set header_bg_style = 'style=\"width:100%; height:250px; z-index:-10; background:url(\'' ~ page.media.images[page.header.header_image].cache.url()  ~ '\') no-repeat top center; background-size:cover\"' %}
+    {% set header_font_class='site-header-image-font-color' %} {# Set font color to white. Defined in custom.css #}
+    {% set navbar_font_class='site-navbar-font-color' %}       {# Set font color to white. Defined in custom.css #}
+{% elseif  theme_config.headerBackgroundImage | first %}
+    {% set header_bg_style = 'style=\"width:100%; height:250px; z-index:-10; background:url(\'' ~ (theme_config.headerBackgroundImage | first).path  ~ '\') no-repeat top center; background-size:cover\"' %}
+    {% set header_font_class='site-header-image-font-color' %} {# Set font color to white. Defined in custom.css #}
+    {% set navbar_font_class='site-navbar-font-color' %}       {# Set font color to white. Defined in custom.css #}
+{% else %}
+    {% set header_bg_style = '' %}
+    {% set header_font_class ='' %} 
+    {% set navbar_font_class='' %} 
+{% endif %}
+
+
+{# Configure header  #}
+{% if page.title  %}
+    {% set main_header = page.title %}
+{%  else %}
+    {%  set main_header = site.title %}
+{% endif %}
+
+{% if page.subheader %}
+    {%  set subheader = subtitle %}
+{% else %}
+    {% set subheader ='' %}
+{% endif %}
+
+<div class="blog-header {{header_font_class}}" {{header_bg_style}}>
+    <div class="container">
+        {% include 'partials/navigation.html.twig' %}
+        <div class ="site-heading">
+            <h1 class="blog-title">{{main_header}}</h1>
+            <p class="lead blog-description">{{subheader}}</p>
+        </div>
+    </div>
+</div>

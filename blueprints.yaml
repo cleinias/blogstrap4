@@ -67,7 +67,7 @@ form:
           'united': "United"
           'yeti': "Yeti"
 
-    add_space_below_header
+    extra_space_below_header
         type: text
         size: medium
         label: Add white space below header
@@ -134,13 +134,6 @@ form:
       accept:
         - image/*
       description: Leave empty if no image is desired
-
-    site_description:
-      type: editor
-      size: medium
-      label: Site description (sub-header for main page header)
-      default: ""
-
 
     favicon_file:
       type: file 
