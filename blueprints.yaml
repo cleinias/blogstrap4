@@ -67,7 +67,7 @@ form:
           'united': "United"
           'yeti': "Yeti"
 
-    extra_space_below_header
+    extra_space_below_header:
         type: text
         size: medium
         label: Add white space below header
@@ -134,6 +134,11 @@ form:
       accept:
         - image/*
       description: Leave empty if no image is desired
+
+    header_font_color:
+      type: colorpicker
+      label: Choose header text  font color
+      description: Only used when a background image is present. Set empty field for default color
 
     favicon_file:
       type: file 
