@@ -1,18 +1,15 @@
 {% set pagination = pagination|default(page.collection.params.pagination) %}
 {% set base_url = base_url|default(page.url) %}
 
-{% if pagination|length > 1 %}
 
-    {#    <ul class="pagination pagination-lg  "> #}
-    <div class ="row">
+{% if pagination|length > 1 %}
         {% if pagination.hasPrev %}
             {% set url =  (base_url ~ pagination.params ~ pagination.prevUrl)|replace({'//':'/'}) %}
-                <a class="btn btn-outline-secondary"  role="button" rel="prev" href="{{ url }}">&laquo; Newer posts</a>
+            <a class="btn btn-outline-secondary"  style="border-radius: 0" role="button" rel="prev" href="{{ url }}">&laquo; Newer posts</a>
         {% endif %}
-
+      
         {% if pagination.hasNext %}
             {% set url = (base_url ~ pagination.params ~ pagination.nextUrl)|replace({'//':'/'}) %}
-                <a class="btn btn-outline-secondary float-right"   role="button"  rel="next" href="{{ url }}">Older posts &raquo;</a>
+            <a class="btn btn-outline-secondary float-right"   style="border-radius: 0" role="button"  rel="next" href="{{ url }}">Older posts &raquo;</a>
         {% endif %}
-    </div>
 {% endif %}
